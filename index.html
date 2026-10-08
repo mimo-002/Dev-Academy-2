@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boda Academy — Mobile Development Bootcamp</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cinema.css">
+  <script>try{if(sessionStorage.getItem("boda-intro")!=="1"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("cinema-on")}catch(e){document.documentElement.classList.add("cinema-on")}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Cinematic intro (cinema.css / cinema.js) -->
+<div id="cinema-splash" aria-hidden="true">
+  <div class="cs-panel cs-top"></div>
+  <div class="cs-panel cs-bottom"></div>
+  <canvas id="cs-rain"></canvas>
+  <div class="cs-scan"></div>
+  <div class="cs-vignette"></div>
+  <div class="cs-flash"></div>
+  <div class="cs-center">
+    <svg class="cs-logo" viewBox="0 0 120 120" fill="none">
+      <defs><linearGradient id="csg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#58a6ff"/><stop offset=".55" stop-color="#79c0ff"/><stop offset="1" stop-color="#3fb950"/></linearGradient></defs>
+      <polygon class="core" points="60,6 106,33 106,87 60,114 14,87 14,33"/>
+      <polygon class="d hex2" pathLength="1" points="60,14 99,37 99,83 60,106 21,83 21,37"/>
+      <polygon class="d hex" pathLength="1" points="60,6 106,33 106,87 60,114 14,87 14,33"/>
+      <path class="d br" pathLength="1" d="M50 44 L34 60 L50 76 M70 44 L86 60 L70 76"/>
+      <path class="d sl" pathLength="1" d="M64 40 L56 80"/>
+    </svg>
+    <h1 class="cs-title" data-text="BODA ACADEMY">BODA ACADEMY</h1>
+    <p class="cs-tag">Mobile Development Bootcamp</p>
+    <div class="cs-term"><div class="dots"><i></i><i></i><i></i></div><span class="ln"></span><span class="ln"></span><span class="ln"></span></div>
+    <div class="cs-chips"><span class="cs-chip f" style="--k:0">Flutter</span><span class="cs-chip k" style="--k:1">Kotlin</span><span class="cs-chip d" style="--k:2">Dart</span></div>
+    <div class="cs-loader"><div class="cs-bar"><i></i></div><span class="cs-pct">0%</span></div>
+  </div>
+  <button class="cs-skip" type="button">تخطي ›</button>
+</div>
+
+<header role="banner" class="site-header">
+  <div class="header-container">
+    <h1 class="site-title">Boda Academy</h1>
+    <p class="site-tagline">Mobile Development Bootcamp</p>
+  </div>
+  <button class="menu" onclick="toggleSidebar()" aria-label="Toggle Navigation Menu">☰</button>
+</header>
+
+<nav class="sidebar" id="sidebar" role="navigation" aria-label="Main Navigation">
+  <div class="nav-header">
+    <h2>المنهاج الأساسي</h2>
+    <p class="nav-subtitle">مسار تعليمي متقدم ومتطور</p>
+  </div>
+  <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن الدروس..." aria-label="Search lessons">
+
+  <section class="curriculum-section">
+    <div class="section-title" onclick="toggleSection(this)" tabindex="0" role="button" aria-expanded="false">
+      <span class="section-name">إطار عمل Flutter</span>
+      <span class="arrow">›</span>
+    </div>
+    <div class="lesson-list" role="list">
+      <div onclick="showLesson('lesson1')" data-lesson="lesson1" role="listitem">1. مقدمة في Flutter</div>
+      <div onclick="showLesson('lesson2')" data-lesson="lesson2" role="listitem">2. الـ Widgets بعمق</div>
+      <div onclick="showLesson('lesson3')" data-lesson="lesson3" role="listitem">3. نظام التخطيط</div>
+      <div onclick="showLesson('lesson4')" data-lesson="lesson4" role="listitem">4. إدارة الحالة</div>
+      <div onclick="showLesson('lesson5')" data-lesson="lesson5" role="listitem">5. نظام الملاحة</div>
+      <div onclick="showLesson('lesson6')" data-lesson="lesson6" role="listitem">6. النماذج والتحقق</div>
+      <div onclick="showLesson('lesson7')" data-lesson="lesson7" role="listitem">7. ربط الـ APIs</div>
+      <div class="final-evaluation" onclick="showSectionFinalBlock('Flutter')" role="listitem">
+        <span class="eval-icon">★</span> <span>التقييم النهائي</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="curriculum-section">
+    <div class="section-title" onclick="toggleSection(this)" tabindex="0" role="button" aria-expanded="false">
+      <span class="section-name">Kotlin للأندرويد</span>
+      <span class="arrow">›</span>
+    </div>
+    <div class="lesson-list" role="list">
+      <div onclick="showLesson('lesson10')" data-lesson="lesson10" role="listitem">10. مقدمة في Kotlin</div>
+      <div onclick="showLesson('lesson11')" data-lesson="lesson11" role="listitem">11. المتغيرات والأنواع</div>
+      <div onclick="showLesson('lesson12')" data-lesson="lesson12" role="listitem">12. الدوال والبرمجة الكائنية</div>
+      <div onclick="showLesson('lesson13')" data-lesson="lesson13" role="listitem">13. مكونات الأندرويد</div>
+      <div class="final-evaluation" onclick="showSectionFinalBlock('Kotlin')" role="listitem">
+        <span class="eval-icon">★</span> <span>التقييم النهائي</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="curriculum-section">
+    <div class="section-title" onclick="toggleSection(this)" tabindex="0" role="button" aria-expanded="false">
+      <span class="section-name">لغة Dart</span>
+      <span class="arrow">›</span>
+    </div>
+    <div class="lesson-list" role="list">
+      <div onclick="showLesson('lesson15')" data-lesson="lesson15" role="listitem">15. أساسيات Dart</div>
+      <div onclick="showLesson('lesson16')" data-lesson="lesson16" role="listitem">16. التحكم في التدفق</div>
+      <div onclick="showLesson('lesson17')" data-lesson="lesson17" role="listitem">17. البرمجة الكائنية الموجهة</div>
+      <div onclick="showLesson('lesson18')" data-lesson="lesson18" role="listitem">18. البرمجة غير المتزامنة</div>
+      <div class="final-evaluation" onclick="showSectionFinalBlock('Dart')" role="listitem">
+        <span class="eval-icon">★</span> <span>التقييم النهائي</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="curriculum-section final-section">
+    <div class="section-title final-assessment" onclick="startFinalAssessment()" role="button" tabindex="0">
+      <span class="eval-icon">★</span> <span>التقييم الشامل الموحد</span>
+    </div>
+  </section>
+</nav>
+
+<main class="main-content" id="mainContent" role="main">
+
+  <section class="introduction" id="intro">
+    <header class="section-header">
+      <h2>برنامج تطوير التطبيقات المحمولة</h2>
+      <p class="subtitle">مسار تعليمي احترافي متقدم لتطوير التطبيقات متعددة المنصات</p>
+    </header>
+    
+    <article class="intro-article">
+      <p>برنامج تدريبي شامل في تطوير التطبيقات المحمولة يجمع بين النظرية والتطبيق العملي. يغطي البرنامج أحدث الأطر البرمجية (Flutter و Kotlin و Dart) مع التركيز على أفضل الممارسات الاحترافية وتطوير المهارات العملية.</p>
+      
+      <section class="learning-path">
+        <h3>هيكل البرنامج التعليمي</h3>
+        <ol class="path-list">
+          <li><strong>دروس المحتوى التفصيلي</strong> — استيعاب المفاهيم الأساسية وأفضل الممارسات البرمجية</li>
+          <li><strong>حكم الكود البرمجي</strong> — تقييم مهارات التطبيق العملي والكتابة الصحيحة</li>
+          <li><strong>اختبار نظري شامل</strong> — قياس الفهم العميق والمعرفة النظرية</li>
+          <li><strong>التقييم النهائي الشامل</strong> — إثبات الكفاءة الكاملة والإتقان المهني</li>
+        </ol>
+      </section>
+
+      <div class="cta-section">
+        <button class="primary-btn" onclick="move()">ابدأ رحلة التعلم</button>
+      </div>
+    </article>
+  </section>
+
+  <section class="curriculum-track" data-track="flutter">
+    <article class="lesson" id="lesson1">
+      <header class="lesson-header">
+        <h2>الدرس 1: مقدمة شاملة في Flutter</h2>
+        <span class="lesson-state" id="state_lesson1">المرحلة: محتوى تعليمي</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>أهداف التعلم الرئيسية</h3>
+          <ul>
+            <li>فهم عميق لـ Flutter كإطار عمل حديث للبرمجة متعددة المنصات</li>
+            <li>التعرف على دور لغة Dart الأساسي في تطوير تطبيقات Flutter</li>
+            <li>فهم مزايا الأداء العالي والأصلية للتطبيقات</li>
+            <li>معرفة حالات الاستخدام الفعلية والتطبيقات الناجحة</li>
+            <li>إدراك الفرق بين Flutter والأطر الأخرى في السوق</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>مقدمة شاملة عن Flutter والمميزات الأساسية</h3>
+          <p><strong>Flutter</strong> هو إطار عمل مفتوح المصدر متطور طورته شركة Google، يمكّن المطورين من إنشاء تطبيقات أصلية عالية الأداء وجميلة الواجهة لعدة منصات من قاعدة رمز واحدة. يجمع بين الأداء الاستثنائي والتصاميم الرائعة سهلة الاستخدام والتطوير السريع.</p>
+          
+          <strong>المميزات الأساسية:</strong>
+          <ul>
+            <li><strong>• أساس الإطار القوي:</strong> إطار عمل مفتوح المصدر موثوق من شركة Google العملاقة</li>
+            <li><strong>• لغة البرمجة المتقدمة:</strong> تستخدم لغة Dart الحديثة والقوية والآمنة من الأخطاء</li>
+            <li><strong>• دعم متعدد المنصات:</strong> تطوير تطبيقات أصلية لأنظمة iOS و Android بكود واحد</li>
+            <li><strong>• الأداء الاستثنائي:</strong> واجهات مستخدم سريعة جداً وجميلة وسعة الاستجابة للمس</li>
+            <li><strong>• Hot Reload:</strong> إعادة تحميل فورية للكود مع الحفاظ على حالة التطبيق</li>
+            <li><strong>• مجتمع نشط:</strong> مكتبات عديدة وموارد تعليمية ضخمة</li>
+          </ul>
+
+          <h4>مثال عملي - هيكل تطبيق Flutter الأساسي:</h4>
+          <div class="code-example">
+            <pre>void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'تطبيقي الأول',
+      home: Scaffold(
+        appBar: AppBar(title: const Text('مرحباً بـ Flutter')),
+        body: const Center(
+          child: Text('أهلاً وسهلاً'),
+        ),
+      ),
+    );
+  }
+}</pre>
+          </div>
+
+          <h4>حالات الاستخدام الناجحة:</h4>
+          <ul>
+            <li><strong>Google Ads:</strong> تطبيق الإعلانات من Google نفسه مكتوب بـ Flutter</li>
+            <li><strong>Alibaba:</strong> منصة التجارة الإلكترونية الضخمة تستخدم Flutter</li>
+            <li><strong>BMW:</strong> تطبيق السيارات الذكية من BMW</li>
+            <li><strong>eBay:</strong> منصة المزادات العالمية</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson1')" class="primary-btn">✓ إكمال الدرس</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="nextLesson()" class="nav-btn next-btn">الدرس التالي →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson2">
+      <header class="lesson-header">
+        <h2>الدرس 2: عمق الـ Widgets</h2>
+        <span class="lesson-state" id="state_lesson2">المرحلة: محتوى تعليمي</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>أهداف التعلم</h3>
+          <ul>
+            <li>إتقان معمارية الـ Widgets الموجهة</li>
+            <li>التمييز بين StatelessWidget و StatefulWidget</li>
+            <li>فهم نموذج تركيب الـ Widgets</li>
+            <li>تطبيق الـ Widgets المدمجة بفعالية</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>كل شيء في Flutter هو Widget</h3>
+          <p>تشكل الـ Widgets اللبنات الأساسية لتطبيقات Flutter، وتمثل عناصر بصرية وهياكل منطقية في نفس الوقت.</p>
+          <ul>
+            <li><strong>معمارية الـ Widgets:</strong> الـ Widgets هي لبنات بناء واجهات Flutter</li>
+            <li><strong>تصنيف الـ Widgets:</strong> نماذج StatelessWidget و StatefulWidget</li>
+            <li><strong>نموذج التركيب:</strong> هيكل شجرة الـ Widgets وأنماط التركيب</li>
+            <li><strong>الـ Widgets المعيارية:</strong> Text و Button و Container وغيرها من الـ Widgets المدمجة</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson2')" class="primary-btn">إكمال الدرس</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← الدرس السابق</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">الدرس التالي →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson3">
+      <header class="lesson-header">
+        <h2>الدرس 3: نظام التخطيط والتصميم</h2>
+        <span class="lesson-state" id="state_lesson3">المرحلة: محتوى تعليمي</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>أهداف التعلم</h3>
+          <ul>
+            <li>إتقان نماذج التخطيط الأفقي والعمودي</li>
+            <li>فهم تقنيات التركيب المتعددة الطبقات</li>
+            <li>تطبيق مبادئ المحاذاة والتوزيع</li>
+            <li>بناء هياكل تخطيط سريعة الاستجابة</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Row و Column و Stack - أنظمة التخطيط</h3>
+          <p>توفر Flutter عناصر تخطيط قوية تتحكم في كيفية وضع وحجم العناصر الفرعية.</p>
+          <ul>
+            <li><strong>Row:</strong> ترتيب العناصر أفقياً في صف واحد</li>
+            <li><strong>Column:</strong> ترتيب العناصر عمودياً في عمود واحد</li>
+            <li><strong>Stack:</strong> وضع العناصر فوق بعضها البعض في طبقات</li>
+            <li><strong>التوسع والملء:</strong> استخدام Expanded و SizedBox للتحكم في المساحات</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson3')" class="primary-btn">إكمال الدرس</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← الدرس السابق</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">الدرس التالي →</button>
+      </nav>
+    </article>
+        </section>
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson3')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson4">
+      <header class="lesson-header">
+        <h2>الدرس 4: إدارة الحالة</h2>
+        <span class="lesson-state" id="state_lesson4">المرحلة: محتوى تعليمي</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Comprehend application state architecture</li>
+            <li>Apply setState methodology</li>
+            <li>Evaluate state management patterns</li>
+            <li>Implement scalable state solutions</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Managing Application State</h3>
+          <p>State management is the cornerstone of responsive and efficient Flutter applications.</p>
+          <ul>
+            <li><strong>setState Method:</strong> The simplest state management approach</li>
+            <li><strong>Stateful Lifecycle:</strong> StatefulWidget lifecycle and state management</li>
+            <li><strong>Provider Pattern:</strong> Advanced state distribution mechanisms</li>
+            <li><strong>BLoC Pattern:</strong> Business Logic Component architectural pattern</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson4')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson5">
+      <header class="lesson-header">
+        <h2>Lesson 5: Navigation System</h2>
+        <span class="lesson-state" id="state_lesson5">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Master screen navigation patterns</li>
+            <li>Implement named routing strategies</li>
+            <li>Control navigation stack operations</li>
+            <li>Pass data across navigation boundaries</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Navigating Between Screens</h3>
+          <p>Navigation is essential for multi-screen applications, enabling seamless user journeys.</p>
+          <ul>
+            <li><strong>Navigator Widget:</strong> Core navigation management</li>
+            <li><strong>Named Routes:</strong> Symbolic route definitions and navigation</li>
+            <li><strong>Stack Operations:</strong> Push and Pop operations for navigation control</li>
+            <li><strong>Route Parameters:</strong> Data passing through route navigation</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson5')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson6">
+      <header class="lesson-header">
+        <h2>Lesson 6: Forms & Validation</h2>
+        <span class="lesson-state" id="state_lesson6">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Create effective form interfaces</li>
+            <li>Implement data validation strategies</li>
+            <li>Apply input decoration patterns</li>
+            <li>Handle keyboard interactions</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Input and Data Validation</h3>
+          <p>Forms are critical interfaces for user data collection and must prioritize both usability and validation.</p>
+          <ul>
+            <li><strong>Input Widgets:</strong> TextField and TextFormField components</li>
+            <li><strong>Validation Framework:</strong> Form validation mechanisms and patterns</li>
+            <li><strong>Input Styling:</strong> Input decoration and visual feedback</li>
+            <li><strong>Keyboard Control:</strong> Keyboard types and input methodology</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson6')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson7">
+      <header class="lesson-header">
+        <h2>Lesson 7: API Integration</h2>
+        <span class="lesson-state" id="state_lesson7">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Establish HTTP communication protocols</li>
+            <li>Parse structured data formats</li>
+            <li>Implement error handling strategies</li>
+            <li>Build resilient API clients</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Connecting APIs to Your Application</h3>
+          <p>Modern applications require robust backend communication and data integration capabilities.</p>
+          <ul>
+            <li><strong>HTTP Package:</strong> Foundational HTTP request mechanisms</li>
+            <li><strong>Dio Library:</strong> Advanced HTTP client library</li>
+            <li><strong>JSON Processing:</strong> Data parsing and serialization</li>
+            <li><strong>Error Handling:</strong> Exception handling and retry strategies</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson7')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+  </section>
+
+  <section class="curriculum-track" data-track="kotlin">
+    <article class="lesson" id="lesson10">
+      <header class="lesson-header">
+        <h2>Lesson 10: Kotlin Introduction</h2>
+        <span class="lesson-state" id="state_lesson10">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Understand Kotlin's design philosophy</li>
+            <li>Recognize JetBrains' innovation ecosystem</li>
+            <li>Evaluate Java interoperability</li>
+            <li>Appreciate modern language design</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Introduction to Kotlin</h3>
+          <p>Kotlin is a modern, pragmatic programming language that combines the power of the JVM with cleaner, safer syntax.</p>
+          <ul>
+            <li><strong>Language Origin:</strong> Modern language from JetBrains</li>
+            <li><strong>Platform Target:</strong> Runs natively on Android platform</li>
+            <li><strong>Java Compatibility:</strong> Fully compatible with Java ecosystem</li>
+            <li><strong>Language Design:</strong> Cleaner and safer syntax than Java</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson10')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <kl;nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson11">
+      <header class="lesson-header">
+        <h2>Lesson 11: Variables & Types</h2>
+        <span class="lesson-state" id="state_lesson11">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Distinguish mutability declarations</li>
+            <li>Leverage type inference systems</li>
+            <li>Implement null safety patterns</li>
+            <li>Apply type system best practices</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Variables and Types</h3>
+          <p>Kotlin's type system provides strong safety guarantees while maintaining code clarity.</p>
+          <ul>
+            <li><strong>Immutability:</strong> val (immutable) declarations</li>
+            <li><strong>Mutability:</strong> var (mutable) declarations</li>
+            <li><strong>Type Inference:</strong> Automatic type deduction</li>
+            <li><strong>Null Safety:</strong> Built-in null safety mechanisms</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson11')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson12">
+      <header class="lesson-header">
+        <h2>Lesson 12: Functions & OOP</h2>
+        <span class="lesson-state" id="state_lesson12">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Define and compose functions effectively</li>
+            <li>Apply object-oriented design principles</li>
+            <li>Implement inheritance hierarchies</li>
+            <li>Use extension functions for abstraction</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Functions and Object-Oriented Programming</h3>
+          <p>Kotlin combines functional programming paradigms with powerful object-oriented capabilities.</p>
+          <ul>
+            <li><strong>Function Declaration:</strong> Modern function syntax and idioms</li>
+            <li><strong>Classes & Inheritance:</strong> Class definition and inheritance mechanisms</li>
+            <li><strong>Interface Design:</strong> Interface contracts and multiple implementation</li>
+            <li><strong>Extension Functions:</strong> Adding functionality to existing types</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson12')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson13">
+      <header class="lesson-header">
+        <h2>Lesson 13: Android Components</h2>
+        <span class="lesson-state" id="state_lesson13">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Master Android application architecture</li>
+            <li>Understand component lifecycle management</li>
+            <li>Apply fragment composition patterns</li>
+            <li>Implement background task mechanisms</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Core Android Components</h3>
+          <p>Android's component architecture provides the foundation for robust, scalable applications.</p>
+          <ul>
+            <li><strong>Activity Lifecycle:</strong> Activity lifecycle management and state preservation</li>
+            <li><strong>Fragment Components:</strong> Fragment-based UI decomposition</li>
+            <li><strong>Services:</strong> Background task and service components</li>
+            <li><strong>Broadcast Receivers:</strong> System and custom event receivers</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson13')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+  </section>
+
+  <section class="curriculum-track" data-track="dart">
+    <article class="lesson" id="lesson15">
+      <header class="lesson-header">
+        <h2>Lesson 15: Dart Basics</h2>
+        <span class="lesson-state" id="state_lesson15">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Master variable declaration patterns</li>
+            <li>Understand Dart's type system</li>
+            <li>Apply dynamic typing effectively</li>
+            <li>Comprehend compilation strategies</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Dart Basics</h3>
+          <p>Dart is an optimized, multi-platform language designed for building fast, scalable applications.</p>
+          <ul>
+            <li><strong>Variable Declaration:</strong> Variable declaration and scoping</li>
+            <li><strong>Type System:</strong> int, double, String, and bool types</li>
+            <li><strong>Dynamic Typing:</strong> Dynamic type support and inference</li>
+            <li><strong>Compilation Model:</strong> Dart VM and compilation targets</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson15')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson16">
+      <header class="lesson-header">
+        <h2>Lesson 16: Control Flow</h2>
+        <span class="lesson-state" id="state_lesson16">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Implement conditional logic patterns</li>
+            <li>Apply case-based decision making</li>
+            <li>Design iteration structures</li>
+            <li>Build robust program logic</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Control Flow</h3>
+          <p>Control flow structures enable the logical branching and iteration necessary for sophisticated programs.</p>
+          <ul>
+            <li><strong>Conditional Statements:</strong> if/else statement structures</li>
+            <li><strong>Switch Statements:</strong> switch/case branching logic</li>
+            <li><strong>For Iteration:</strong> for loop mechanisms</li>
+            <li><strong>While Iteration:</strong> while and do-while loops</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson16')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson17">
+      <header class="lesson-header">
+        <h2>Lesson 17: Object Oriented Programming</h2>
+        <span class="lesson-state" id="state_lesson17">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Design and implement classes</li>
+            <li>Apply inheritance principles</li>
+            <li>Leverage polymorphic patterns</li>
+            <li>Implement abstraction models</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Object-Oriented Programming</h3>
+          <p>Object-oriented design enables the creation of modular, maintainable, and scalable applications.</p>
+          <ul>
+            <li><strong>Class Design:</strong> Classes and object instantiation</li>
+            <li><strong>Inheritance Model:</strong> Inheritance and hierarchical relationships</li>
+            <li><strong>Polymorphism:</strong> Polymorphic method overriding and dispatch</li>
+            <li><strong>Abstraction:</strong> Abstract classes and interface contracts</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson17')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+
+    <article class="lesson" id="lesson18">
+      <header class="lesson-header">
+        <h2>Lesson 18: Asynchronous Programming</h2>
+        <span class="lesson-state" id="state_lesson18">Stage: Content</span>
+      </header>
+      <div class="lesson-content">
+        <section class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Understand asynchronous execution models</li>
+            <li>Implement futures and promises</li>
+            <li>Apply async/await syntax</li>
+            <li>Handle concurrent data streams</li>
+          </ul>
+        </section>
+        
+        <section class="lesson-body">
+          <h3>Asynchronous Programming</h3>
+          <p>Asynchronous programming enables responsive, non-blocking applications that handle I/O operations efficiently.</p>
+          <ul>
+            <li><strong>Future Model:</strong> Future-based asynchronous programming</li>
+            <li><strong>Async/Await:</strong> Modern async/await syntax</li>
+            <li><strong>Error Handling:</strong> Exception handling in asynchronous contexts</li>
+            <li><strong>Streams:</strong> Continuous asynchronous data flow</li>
+          </ul>
+        </section>
+        
+        <div class="action-section">
+          <button onclick="completeLessonContent('lesson18')" class="primary-btn">Complete Lesson Content</button>
+        </div>
+      </div>
+      <nav class="lesson-nav">
+        <button onclick="prevLesson()" class="nav-btn prev-btn">← Previous Lesson</button>
+        <button onclick="nextLesson()" class="nav-btn next-btn">Next Lesson →</button>
+      </nav>
+    </article>
+  </section>
+
+</main>
+
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-content">
+    <section class="footer-section">
+      <h3>أكاديمية بودا</h3>
+      <p>برنامج احترافي متقدم لتطوير التطبيقات المحمولة</p>
+    </section>
+    
+    <section class="footer-section">
+      <h3>المسارات التعليمية</h3>
+      <ul>
+        <li>تطوير تطبيقات Flutter</li>
+        <li>Kotlin لمنصة الأندرويد</li>
+        <li>أساسيات لغة Dart</li>
+      </ul>
+    </section>
+    
+    <section class="footer-section">
+      <h3>معلومات البرنامج</h3>
+      <p>مسار تعليمي منظم يجمع بين المعرفة النظرية وتقييمات الكود العملية والتقييمات الشاملة.</p>
+    </section>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2026 أكاديمية بودا. جميع الحقوق محفوظة.</p>
+    <p>المدرب: عبدالله صلاح</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="cinema.js"></script>
+</body>
+</html>
